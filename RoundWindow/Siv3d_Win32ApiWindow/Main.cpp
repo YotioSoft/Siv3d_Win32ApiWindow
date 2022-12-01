@@ -24,8 +24,8 @@ void Main()
 
 	WNDCLASS wc;
 	HWND hwnd;
-	TCHAR szAppName[] = TEXT("TestApp");
-
+	TCHAR szAppName[1024];
+	/*
 	// ウィンドウクラスの属性を設定
 	wc.style = CS_HREDRAW | CS_VREDRAW;
 	wc.lpfnWndProc = DefWindowProc;
@@ -40,9 +40,14 @@ void Main()
 
 	// ウィンドウクラスを登録
 	if (!RegisterClass(&wc)) return;
+	*/
+
+	GetClassName(hWnd, szAppName, 1024);
+
+	Console << Unicode::Widen((char*)szAppName);
 
 	auto hWndOwned = CreateWindow(szAppName, L"Child Window",
-	WS_POPUP | WS_CAPTION | WS_VISIBLE,
+	WS_OVERLAPPEDWINDOW,
 	100, 100, 200, 200, hWnd, NULL, hInstance, NULL);
 	Console << hWndOwned;
 	// if (!hWndOwned) return FALSE;
