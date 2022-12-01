@@ -22,10 +22,11 @@ void Main()
 
 	HINSTANCE hInstance = (HINSTANCE)GetWindowLongPtr(hWnd, GWLP_HINSTANCE);
 
-	auto hWndChild = CreateWindow(L"MyWindowClass", L"Child Window",
-	  WS_CHILD | WS_CAPTION | WS_VISIBLE,
-	  0, 0, 150, 100, hWnd, NULL, hInstance, NULL);
-	//if (!hWndChild) return FALSE;
+	auto hWndOwned = CreateWindow(L"STATIC", L"Child Window",
+	WS_POPUP | WS_CAPTION | WS_VISIBLE,
+	100, 100, 200, 200, hWnd, NULL, hInstance, NULL);
+	Console << hWndOwned;
+	// if (!hWndOwned) return FALSE;
 
 	// 被所有ウィンドウ
 	/*
@@ -43,10 +44,7 @@ void Main()
 
 	// マウスクリックした地点の記録用
 	Point mouse_clicked;
-	while (System::Update() && GetMessage(&msg, NULL, 0, 0)) {
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-
+	while (System::Update()) {
 		// ウィンドウの移動用処理
 		if (MouseL.down()) {
 			mouse_clicked = Cursor::Pos();
