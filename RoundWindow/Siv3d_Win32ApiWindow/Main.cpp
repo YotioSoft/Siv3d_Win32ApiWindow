@@ -20,6 +20,11 @@ void Main()
 	// 次にウィンドウに適用
 	SetWindowRgn(hWnd, hRegion, 1);
 
+	auto nIndex = GetWindowLongA(hWnd, GWL_EXSTYLE);
+	SetWindowLongA(hWnd, GWL_EXSTYLE, nIndex | WS_EX_LAYERED);
+
+	SetLayeredWindowAttributes(hWnd, 0, 200, 2);
+
 	// マウスクリックした地点の記録用
 	Point mouse_clicked;
 	while (System::Update()) {
