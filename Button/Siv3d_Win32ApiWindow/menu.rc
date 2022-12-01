@@ -1,0 +1,18 @@
+KITTY MENU{
+	POPUP "cat girls" {
+		MENUITEM "Kitty on your lap" , 40001
+		MENUITEM "Tokyo mew mew" , 40002
+
+		MENUITEM SEPARATOR
+
+		POPUP "Magical nyan nyan TARUTO" {
+			MENUITEM "たると" , 40003
+			MENUITEM "シャルロッテ" , 40004
+			MENUITEM "ちとせ" , 40005
+		}
+	}
+	POPUP "Card Captor Sakura" {
+		MENUITEM "さくら" , 40006
+		MENUITEM "知世" , 40007
+	}
+}
