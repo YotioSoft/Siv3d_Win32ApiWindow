@@ -20,8 +20,21 @@ void Main()
 	// 次にウィンドウに適用
 	//SetWindowRgn(hWnd, hRegion, 1);
 
+	// 参考:https://learn.microsoft.com/ja-jp/windows/win32/winmsg/extended-window-styles
+
 	auto nIndex = GetWindowLongA(hWnd, GWL_STYLE);
-	SetWindowLongA(hWnd, GWL_STYLE, nIndex & ~WS_CAPTION);
+	//SetWindowLongA(hWnd, GWL_STYLE, nIndex & ~WS_CAPTION);			// タイトルバー非表示
+	//SetWindowLongA(hWnd, GWL_STYLE, nIndex & ~WS_SYSMENU);			// 最小化・最大化・閉じるボタン非表示
+	//SetWindowLongA(hWnd, GWL_STYLE, nIndex & ~WS_MINIMIZEBOX);			// 閉じるボタンだけ
+
+	auto nIndexEx = GetWindowLongA(hWnd, GWL_EXSTYLE);
+	// ?
+	//SetWindowLongA(hWnd, GWL_STYLE, nIndex & ~WS_MINIMIZEBOX);
+	//SetWindowLongA(hWnd, GWL_EXSTYLE, nIndexEx | WS_EX_CONTEXTHELP);
+	// タイトルバーを左右逆に
+	//SetWindowLongA(hWnd, GWL_EXSTYLE, nIndexEx | WS_EX_LAYOUTRTL);
+	// 短めのタイトルバー（フローティング ツールバー）
+	SetWindowLongA(hWnd, GWL_EXSTYLE, nIndexEx | WS_EX_TOOLWINDOW);
 
 	SetLayeredWindowAttributes(hWnd, 0, 200, 2);
 
