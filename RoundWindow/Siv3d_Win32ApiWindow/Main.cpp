@@ -22,7 +22,26 @@ void Main()
 
 	HINSTANCE hInstance = (HINSTANCE)GetWindowLongPtr(hWnd, GWLP_HINSTANCE);
 
-	auto hWndOwned = CreateWindow(L"STATIC", L"Child Window",
+	WNDCLASS wc;
+	HWND hwnd;
+	TCHAR szAppName[] = TEXT("TestApp");
+
+	// ウィンドウクラスの属性を設定
+	wc.style = CS_HREDRAW | CS_VREDRAW;
+	wc.lpfnWndProc = DefWindowProc;
+	wc.cbClsExtra = 0;
+	wc.cbWndExtra = 0;
+	wc.hInstance = hInstance;
+	wc.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
+	wc.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+	wc.lpszMenuName = NULL;
+	wc.lpszClassName = szAppName;
+
+	// ウィンドウクラスを登録
+	if (!RegisterClass(&wc)) return;
+
+	auto hWndOwned = CreateWindow(szAppName, L"Child Window",
 	WS_POPUP | WS_CAPTION | WS_VISIBLE,
 	100, 100, 200, 200, hWnd, NULL, hInstance, NULL);
 	Console << hWndOwned;
