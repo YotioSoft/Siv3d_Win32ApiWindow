@@ -6,7 +6,7 @@
 void Main()
 {
 	// 標準機能で枠なしウィンドウを作成
-	Window::SetStyle(WindowStyle::Frameless);
+	//Window::SetStyle(WindowStyle::Frameless);
 
 	// 背景色は白に
 	Scene::SetBackground(Color(Palette::White));
@@ -16,11 +16,11 @@ void Main()
 
 	// ウィンドウを角丸にする（要Win32API）
 	// まず、ウィンドウの形を示すためのリージョンを作成（大きさ640x480, 角丸50x50）
-	auto hRegion = CreateRoundRectRgn(0, 0, 640, 480, 100, 100);
+	//auto hRegion = CreateRoundRectRgn(0, 0, 640, 480, 100, 100);
 	// 次にウィンドウに適用
-	SetWindowRgn(hWnd, hRegion, 1);
+	//SetWindowRgn(hWnd, hRegion, 1);
 
-	HINSTANCE hInstance = (HINSTANCE)GetWindowLongPtr(hWnd, GWLP_HINSTANCE);
+	HINSTANCE hInstance = ::GetModuleHandle(NULL);
 
 	WNDCLASS wc;
 	HWND hwnd;
@@ -46,10 +46,11 @@ void Main()
 
 	Console << Unicode::Widen((char*)szAppName);
 
-	auto hWndOwned = CreateWindow(szAppName, L"Child Window",
-	WS_OVERLAPPEDWINDOW,
-	100, 100, 200, 200, hWnd, NULL, hInstance, NULL);
-	Console << hWndOwned;
+	auto hBtn = CreateWindowEx(0, L"BUTTON", L"Push!!",
+			WS_CHILD | WS_VISIBLE | BS_FLAT,
+			0, 0, 50, 30,
+			hWnd, (HMENU)100, hInstance, NULL);
+
 	// if (!hWndOwned) return FALSE;
 
 	// 被所有ウィンドウ
