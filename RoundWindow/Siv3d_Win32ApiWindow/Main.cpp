@@ -1,7 +1,5 @@
-﻿#include <Siv3D.hpp> // OpenSiv3D v0.4.3
+﻿#include <Siv3D.hpp> // OpenSiv3D v0.6.6
 #include <Siv3D/Windows/Windows.hpp>
-
-#define CLASSNAME "MyWindowClass"
 
 void Main()
 {
@@ -15,7 +13,7 @@ void Main()
 	auto hWnd = static_cast<HWND>(s3d::Platform::Windows::Window::GetHWND());
 
 	// ウィンドウを角丸にする（要Win32API）
-	// まず、ウィンドウの形を示すためのリージョンを作成（大きさ640x480, 角丸50x50）
+	// まず、ウィンドウの形を示すためのリージョンを作成（大きさ640x480, 角丸100x100）
 	auto hRegion = CreateRoundRectRgn(0, 0, 640, 480, 100, 100);
 	// 次にウィンドウに適用
 	SetWindowRgn(hWnd, hRegion, 1);
