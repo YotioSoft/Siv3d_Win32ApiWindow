@@ -1,7 +1,5 @@
-﻿#include <Siv3D.hpp> // OpenSiv3D v0.4.3
+﻿#include <Siv3D.hpp> // OpenSiv3D v0.6.6
 #include <Siv3D/Windows/Windows.hpp>
-
-#define CLASSNAME "MyWindowClass"
 
 void Main()
 {
@@ -14,17 +12,12 @@ void Main()
 	// Windowハンドル取得
 	auto hWnd = static_cast<HWND>(s3d::Platform::Windows::Window::GetHWND());
 
-	// ウィンドウを角丸にする（要Win32API）
-	// まず、ウィンドウの形を示すためのリージョンを作成（大きさ640x480, 角丸50x50）
-	//auto hRegion = CreateRoundRectRgn(0, 0, 640, 480, 100, 100);
-	// 次にウィンドウに適用
-	//SetWindowRgn(hWnd, hRegion, 1);
-
-	// 参考:https://learn.microsoft.com/ja-jp/windows/win32/winmsg/extended-window-styles
-
+	// 現在のウィンドウスタイルを取得
 	auto nIndex = GetWindowLongA(hWnd, GWL_STYLE);
-	SetWindowLongA(hWnd, GWL_STYLE, nIndex & ~WS_CAPTION);			// タイトルバー非表示
-	//SetWindowLongA(hWnd, GWL_STYLE, nIndex & ~WS_SYSMENU);			// 最小化・最大化・閉じるボタン非表示
+
+	// タイトルバーを非表示に
+	//SetWindowLongA(hWnd, GWL_STYLE, nIndex & ~WS_CAPTION);			// タイトルバー非表示
+	SetWindowLongA(hWnd, GWL_STYLE, nIndex & ~WS_SYSMENU);			// 最小化・最大化・閉じるボタン非表示
 	//SetWindowLongA(hWnd, GWL_STYLE, nIndex & ~WS_MINIMIZEBOX);			// 閉じるボタンだけ
 
 	auto nIndexEx = GetWindowLongA(hWnd, GWL_EXSTYLE);
@@ -36,8 +29,6 @@ void Main()
 	// 短めのタイトルバー（フローティング ツールバー）
 	//SetWindowLongA(hWnd, GWL_EXSTYLE, nIndexEx | WS_EX_TOOLWINDOW);
 
-	// マウスクリックした地点の記録用
-	Point mouse_clicked;
 	while (System::Update()) {
 		Print << U"Hello!";
 	}
