@@ -23,7 +23,7 @@ void Main()
 	// 参考:https://learn.microsoft.com/ja-jp/windows/win32/winmsg/extended-window-styles
 
 	auto nIndex = GetWindowLongA(hWnd, GWL_STYLE);
-	//SetWindowLongA(hWnd, GWL_STYLE, nIndex & ~WS_CAPTION);			// タイトルバー非表示
+	SetWindowLongA(hWnd, GWL_STYLE, nIndex & ~WS_CAPTION);			// タイトルバー非表示
 	//SetWindowLongA(hWnd, GWL_STYLE, nIndex & ~WS_SYSMENU);			// 最小化・最大化・閉じるボタン非表示
 	//SetWindowLongA(hWnd, GWL_STYLE, nIndex & ~WS_MINIMIZEBOX);			// 閉じるボタンだけ
 
@@ -34,22 +34,11 @@ void Main()
 	// タイトルバーを左右逆に
 	//SetWindowLongA(hWnd, GWL_EXSTYLE, nIndexEx | WS_EX_LAYOUTRTL);
 	// 短めのタイトルバー（フローティング ツールバー）
-	SetWindowLongA(hWnd, GWL_EXSTYLE, nIndexEx | WS_EX_TOOLWINDOW);
-
-	SetLayeredWindowAttributes(hWnd, 0, 200, 2);
+	//SetWindowLongA(hWnd, GWL_EXSTYLE, nIndexEx | WS_EX_TOOLWINDOW);
 
 	// マウスクリックした地点の記録用
 	Point mouse_clicked;
 	while (System::Update()) {
-		// ウィンドウの移動用処理
-		/*
-		if (MouseL.down()) {
-			mouse_clicked = Cursor::Pos();
-		}
-		if (MouseL.pressed()) {
-			Window::SetPos(Cursor::ScreenPos() - mouse_clicked);
-		}
-		*/
 		Print << U"Hello!";
 	}
 }
