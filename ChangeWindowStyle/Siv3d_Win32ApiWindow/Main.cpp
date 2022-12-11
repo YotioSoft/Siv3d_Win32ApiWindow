@@ -3,9 +3,6 @@
 
 void Main()
 {
-	// 標準機能で枠なしウィンドウを作成
-	//Window::SetStyle(WindowStyle::Frameless);
-
 	// 背景色は白に
 	Scene::SetBackground(Color(Palette::White));
 
