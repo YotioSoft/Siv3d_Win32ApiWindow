@@ -17,7 +17,7 @@ void Main()
 	// 背景色は白に
 	Scene::SetBackground(Color(Palette::White));
 
-	Window::Resize(300, 300);
+	Window::Resize(600, 600);
 
 	// Windowハンドル取得
 	auto hWnd = static_cast<HWND>(s3d::Platform::Windows::Window::GetHWND());
@@ -39,15 +39,19 @@ void Main()
 	auto hRegion = CreatePolygonRgn(pt, 3, ALTERNATE);			// 多角形リージョンより生成
 	*/
 	// 星型リージョンの生成
-	Console << U"{}, {}"_fmt(Scene::Width() / 2 * Math::Sin(90_deg), Scene::Height() / 2 * Math::Cos(90_deg));
-	POINT pt[5];
+	POINT pt[10];
 	int r = Scene::Width() / 2;
-	pt[0].x = Scene::Width() / 2 + r * Math::Cos(-90_deg);	pt[0].y = Scene::Height() / 2 + r * Math::Sin(-90_deg);
-	pt[1].x = Scene::Width() / 2 + r * Math::Cos(-90_deg + 72_deg);	pt[1].y = Scene::Height() / 2 + r * Math::Sin(-90_deg + 72_deg);
-	pt[2].x = Scene::Width() / 2 + r * Math::Cos(-90_deg + 72_deg * 2);	pt[2].y = Scene::Height() / 2 + r * Math::Sin(-90_deg + 72_deg * 2);
-	pt[3].x = Scene::Width() / 2 + r * Math::Cos(-90_deg + 72_deg * 3);	pt[3].y = Scene::Height() / 2 + r * Math::Sin(-90_deg + 72_deg * 3);
-	pt[4].x = Scene::Width() / 2 + r * Math::Cos(-90_deg + 72_deg * 4);	pt[4].y = Scene::Height() / 2 + r * Math::Sin(-90_deg + 72_deg * 4);
-	auto hRegion = CreatePolygonRgn(pt, 5, ALTERNATE);			// 多角形リージョンより生成
+	pt[0].x = Scene::Width() / 2 + r * Math::Cos(-90_deg);								pt[0].y = Scene::Height() / 2 + r * Math::Sin(-90_deg);
+	pt[1].x = Scene::Width() / 2 + r / 2.5 * Math::Cos(-90_deg + 36_deg);				pt[1].y = Scene::Height() / 2 + r / 2.5 * Math::Sin(-90_deg + 36_deg);
+	pt[2].x = Scene::Width() / 2 + r * Math::Cos(-90_deg + 72_deg);						pt[2].y = Scene::Height() / 2 + r * Math::Sin(-90_deg + 72_deg);
+	pt[3].x = Scene::Width() / 2 + r / 2.5 * Math::Cos(-90_deg + 72_deg + 36_deg);		pt[3].y = Scene::Height() / 2 + r / 2.5 * Math::Sin(-90_deg + 72_deg + 36_deg);
+	pt[4].x = Scene::Width() / 2 + r * Math::Cos(-90_deg + 72_deg * 2);					pt[4].y = Scene::Height() / 2 + r * Math::Sin(-90_deg + 72_deg * 2);
+	pt[5].x = Scene::Width() / 2 + r / 2.5 * Math::Cos(-90_deg + 72_deg * 2 + 36_deg);	pt[5].y = Scene::Height() / 2 + r / 2.5 * Math::Sin(-90_deg + 72_deg * 2 + 36_deg);
+	pt[6].x = Scene::Width() / 2 + r * Math::Cos(-90_deg + 72_deg * 3);					pt[6].y = Scene::Height() / 2 + r * Math::Sin(-90_deg + 72_deg * 3);
+	pt[7].x = Scene::Width() / 2 + r / 2.5 * Math::Cos(-90_deg + 72_deg * 3 + 36_deg);	pt[7].y = Scene::Height() / 2 + r / 2.5 * Math::Sin(-90_deg + 72_deg * 3 + 36_deg);
+	pt[8].x = Scene::Width() / 2 + r * Math::Cos(-90_deg + 72_deg * 4);					pt[8].y = Scene::Height() / 2 + r * Math::Sin(-90_deg + 72_deg * 4);
+	pt[9].x = Scene::Width() / 2 + r / 2.5 * Math::Cos(-90_deg + 72_deg * 4 + 36_deg);	pt[9].y = Scene::Height() / 2 + r / 2.5 * Math::Sin(-90_deg + 72_deg * 4 + 36_deg);
+	auto hRegion = CreatePolygonRgn(pt, 10, ALTERNATE);			// 多角形リージョンより生成
 	// ウィンドウに適用
 	SetWindowRgn(hWnd, hRegion, 1);
 
@@ -61,6 +65,6 @@ void Main()
 		if (MouseL.pressed()) {
 			Window::SetPos(Cursor::ScreenPos() - mouse_clicked);
 		}
-		Print << U"Hello!";
+		Print << U"Hello star window!";
 	}
 }
